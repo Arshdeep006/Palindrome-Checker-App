@@ -1,27 +1,31 @@
-public class PalindromeCheckerApp {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter a string: ");
-        String text = input.nextLine();
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.Stack;
 
+public class PalindromeCheckerApp{
+
+    public static void main(String[] args) {
+
+        String input = "civic";
+
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
-        for (int i = 0; i < text.length(); i++) {
-            stack.push(text.charAt(i));
+        for (char c : input.toCharArray()) {
+            queue.add(c);
+            stack.push(c);
         }
 
-        String reversed = "";
+        boolean isPalindrome = true;
 
-        while (!stack.isEmpty()) {
-            reversed += stack.pop();
+        while (!queue.isEmpty()) {
+            if (!queue.remove().equals(stack.pop())) {
+                isPalindrome = false;
+                break;
+            }
         }
 
-        if (text.equals(reversed)) {
-            System.out.println("The entered string is a palindrome");
-        } else {
-            System.out.println("The entered string is not a palindrome");
-        }
-
-        input.close();
-}
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
+    }
 }
