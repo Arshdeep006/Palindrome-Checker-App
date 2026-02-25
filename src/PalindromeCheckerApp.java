@@ -1,13 +1,11 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-
-    System.out.println("====================================");
-    System.out.println("   Palindrome Checker Application   ");
-    System.out.println("====================================");
-
-    System.out.println("Version: 1.0");
-    System.out.println("Welcome to the Palindrome Checker Management System!");
-
-    System.out.println("\nApplication started successfully.");
+        String text = "level";
+        String reversed = new StringBuilder(text).reverse().toString();
+        if (text.equals(reversed)) {
+            System.out.println("The given string is a palindrome");
+        } else {
+            System.out.println("The given string is not a palindrome");
+        }
 }
 }
