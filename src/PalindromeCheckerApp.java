@@ -1,60 +1,20 @@
+import java.util.Deque;
+import java.util.ArrayDeque;
 import java.util.Scanner;
 
-class PalindromeCheckerApp {
+class UseCase7PalindromeCheckerApp {
 
-    static class Node {
-        char data;
-        Node next;
-        Node(char data) {
-            this.data = data;
-            this.next = null;
-        }
-    }
+    static boolean isPalindrome(String input) {
+        Deque<Character> deque = new ArrayDeque<>();
 
-    static Node head = null;
-
-    static void insert(char data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-            return;
-        }
-        Node temp = head;
-        while (temp.next != null) {
-            temp = temp.next;
-        }
-        temp.next = newNode;
-    }
-
-    static boolean isPalindrome() {
-        if (head == null || head.next == null)
-            return true;
-
-        Node slow = head;
-        Node fast = head;
-
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
+        for (char c : input.toCharArray()) {
+            deque.addLast(c);
         }
 
-        Node prev = null;
-        Node current = slow;
-        while (current != null) {
-            Node nextNode = current.next;
-            current.next = prev;
-            prev = current;
-            current = nextNode;
-        }
-
-        Node firstHalf = head;
-        Node secondHalf = prev;
-
-        while (secondHalf != null) {
-            if (firstHalf.data != secondHalf.data)
+        while (deque.size() > 1) {
+            if (!deque.removeFirst().equals(deque.removeLast())) {
                 return false;
-            firstHalf = firstHalf.next;
-            secondHalf = secondHalf.next;
+            }
         }
 
         return true;
@@ -63,16 +23,11 @@ class PalindromeCheckerApp {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Palindrome Checker App");
-        System.out.println("UC8: Linked List Based Palindrome Checker");
+        System.out.println("UC7: Deque-Based Optimized Palindrome Checker");
         System.out.print("Enter a string: ");
         String input = sc.nextLine();
 
-        head = null;
-        for (char c : input.toCharArray()) {
-            insert(c);
-        }
-
-        if (isPalindrome())
+        if (isPalindrome(input))
             System.out.println("The given string is a Palindrome.");
         else
             System.out.println("The given string is NOT a Palindrome.");
