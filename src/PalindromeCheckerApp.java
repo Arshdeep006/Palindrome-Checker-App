@@ -1,25 +1,21 @@
-import java.util.Scanner;
-
-class PalindromeCheckerApp {
-
-    static boolean isPalindrome(String str, int start, int end) {
-        if (start >= end)
-            return true;
-        if (str.charAt(start) != str.charAt(end))
-            return false;
-        return isPalindrome(str, start + 1, end - 1);
-    }
+public class PalindromeCheckerApp{
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Palindrome Checker App");
-        System.out.println("UC9: Recursive Palindrome Checker");
-        System.out.print("Enter a string: ");
-        String input = sc.nextLine();
 
-        if (isPalindrome(input, 0, input.length() - 1))
-            System.out.println("The given string is a Palindrome.");
-        else
-            System.out.println("The given string is NOT a Palindrome.");
+        String input = "A man a plan a canal Panama";
+
+        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        boolean isPalindrome = true;
+
+        for (int i = 0; i < normalized.length() / 2; i++) {
+            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
